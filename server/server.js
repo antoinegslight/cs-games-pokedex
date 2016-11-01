@@ -1,11 +1,35 @@
 var express = require('express');
-
 var app = express();
+var bodyParser = require('body-parser');
 
-app.get('/', function(req, res) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end('Pokedex');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+var port = process.env.PORT || 5678;
+var router = express.Router();
+
+router.get('/', function(req, res) {
+    res.json({ message: 'Pokedex' });
 });
 
-app.listen(5678);
-console.log("Listening on port 5678");
+router.route('/pokemons')
+
+    .get(function(req, res) {
+        res.json({
+            "pokemons": [
+                {
+                    "name": "Charmander",
+                    "type": "Fire"
+                },
+                {
+                  "name": "Pickachu",
+                  "type": "Electric"
+                }
+            ]
+        });
+    });
+
+app.use('/pokedex', router);
+app.listen(port);
+
+console.log('Listening on port ' + port);
