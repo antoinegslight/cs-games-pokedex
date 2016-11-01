@@ -18,12 +18,14 @@ var pokemons = [
     {
       "number": "004",
       "name": "Charmander",
-      "type": "Fire"
+      "type": "Fire",
+      "image": ""
     },
     {
       "number": "025",
       "name": "Pickachu",
-      "type": "Electric"
+      "type": "Electric",
+      "image": ""
     }
 ];
 
@@ -40,11 +42,7 @@ router.route('/pokemons')
     })
 
     .post(function(req, res) {
-        var pokemon = {};
-        pokemon.number = req.body.number;
-        pokemon.name = req.body.name;
-        pokemon.type = req.body.type;
-        pokemons.push(pokemon);
+        pokemons.push(req.body);
         res.json({ message: 'Pokemon created!' });
     });
 
