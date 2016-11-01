@@ -19,13 +19,13 @@ var pokemons = [
       "number": "004",
       "name": "Charmander",
       "type": "Fire",
-      "image": ""
+      "image": "http://cdn.bulbagarden.net/upload/thumb/7/73/004Charmander.png/250px-004Charmander.png"
     },
     {
       "number": "025",
       "name": "Pickachu",
       "type": "Electric",
-      "image": ""
+      "image": "http://cdn.bulbagarden.net/upload/thumb/0/0d/025Pikachu.png/250px-025Pikachu.png"
     }
 ];
 
