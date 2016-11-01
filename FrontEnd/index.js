@@ -1,5 +1,5 @@
 function acceptPokemon(){
-   console.log("hello"); 
+   console.log("hello");
     var inputName = document.getElementById('inputName').value;
     var inputType= document.getElementById('inputType').value;
     var inputNumber = document.getElementById('inputNumber').value;
@@ -31,7 +31,7 @@ function refresh(){
 
 
 function getAllPokemon(){
-   console.log("hello"); 
+   console.log("hello");
     $.ajax({
         url:'http://localhost:5678/pokedex/pokemons',
         contentType: 'application/json; charser=UTF-8',
@@ -46,7 +46,7 @@ function getAllPokemon(){
             //var type = pokemon.type;
             //var number = pokemon.number;
             //var image = "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png";
-            //renderPokemon(name,image,type, number);     
+            //renderPokemon(name,image,type, number);
         }
     });
 }
@@ -55,13 +55,13 @@ function addPokemon(pokemon){
     var name = pokemon.name;
     var type = pokemon.type;
     var number = pokemon.number;
-    var image = "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png";
+    var image = pokemon.image;
     renderPokemon(name,image,type, number);
 }
 
 function renderPokemon(name, imageUrl, type, number){
     var allPokemons = document.getElementById('AllPokemons');
-    var image = document.createElement('img');    
+    var image = document.createElement('img');
     image.src = imageUrl;
 
     var title = document.createElement('h2');
