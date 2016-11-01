@@ -1,20 +1,36 @@
 function acceptPokemon(){
    console.log("hello"); 
+    var inputName = document.getElementById('inputName').value;
+    var inputType= document.getElementById('inputType').value;
+    var inputNumber = document.getElementById('inputNumber').value;
+    var inputImage = document.getElementById('inputImage').value;
+    var pokemon = {}
+    pokemon.name = inputName;
+    pokemon.type = inputType;
+    pokemon.number = inputNumber;
+    pokemon.image = inputImage;
+    console.log(pokemon);
     $.ajax({
-        url:'http://localhost:5678/pokemon',
+        url:'http://localhost:5678/pokedex/pokemons',
         contentType: 'application/json; charser=UTF-8',
         type: 'POST',
-        data: JSON.stringify({'test':'test'})
+        data: JSON.stringify(pokemon)
     }).done(function(data){
-        console.log("hello");
         console.log(data);
-        var name =data.body.name;
-        var type = data.body.type;
-        var number = data.body.number;
+        addPokemon(pokemon);
+        refresh();
     });
 }
+function refresh(){
+    var allPokemons = document.getElementById('AllPokemons');
+    while(allPokemons.hasChildNodes()){
+        allPokemons.removeChild(allPokemons.lastChild);
+    }
+    getAllPokemon();
+}
 
-function acceptPokemon(){
+
+function getAllPokemon(){
    console.log("hello"); 
     $.ajax({
         url:'http://localhost:5678/pokedex/pokemons',
@@ -23,16 +39,24 @@ function acceptPokemon(){
     }).done(function(data){
         console.log("hello");
         console.log(data);
-        for(pokemon in data.body.pokemons){
-            var name = pokemon.name;
-            var type = pokemon.type;
-            var number = pokemon.number;
-            renderPokemon(name,"http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png",type, number);     
+         for(i = 0; i < data.pokemons.length; i++){
+            var pokemon = data.pokemons[i];
+            addPokemon(pokemon);
+            //var name = pokemon.name;
+            //var type = pokemon.type;
+            //var number = pokemon.number;
+            //var image = "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png";
+            //renderPokemon(name,image,type, number);     
         }
-        var name =data.body.name;
-        var type = data.body.type;
-        var number = data.body.number;
     });
+}
+
+function addPokemon(pokemon){
+    var name = pokemon.name;
+    var type = pokemon.type;
+    var number = pokemon.number;
+    var image = "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png";
+    renderPokemon(name,image,type, number);
 }
 
 function renderPokemon(name, imageUrl, type, number){
@@ -62,4 +86,4 @@ function renderPokemon(name, imageUrl, type, number){
 }
 
 //renderPokemon("Pikachu", "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png", "electric", 25);
-acceptPokemon();
+getAllPokemon();
